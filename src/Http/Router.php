@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Http;
@@ -15,7 +16,11 @@ class Router
     */
     public function add($path, $file)
     {
-        $this->routes[trim($path, '/')] = $file;
+        // Convert parameter to regular expressions
+        $path = trim($path, '/');
+        $path = preg_replace('/\//', '\/', $path);
+        $regexPath = preg_replace('/\{([a-zA-Z_][a-zA-Z0-9_]*)\}/', '(?P<$1>[^\\/]+)', trim($path, '/'));
+        $this->routes["/^" . $regexPath . "$/"] = $file;
     }
 
     /**
@@ -30,22 +35,25 @@ class Router
 
     /**
     * Dispatch the router
-    * @return void
+    * @return file
     */
     public function dispatch()
     {
         $requestUri = trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
+        foreach ($this->routes as $routePattern => $file) {
+            if (preg_match($routePattern, $requestUri, $matches)) {
+                if (file_exists($file)) {
+                    // Extract and capture vars and make them available
+                    $params = array_filter($matches, 'is_string', ARRAY_FILTER_USE_KEY);
+                    extract($params);
 
-        if (array_key_exists($requestUri, $this->routes)) {
-            $file = $this->routes[$requestUri];
-
-            if (file_exists($file)) {
-                require $file;
-                return;
-            } else {
-                http_response_code(500);
-                echo "Error: El archivo asociado no existe.";
-                return;
+                    require $file;
+                    return;
+                } else {
+                    http_response_code(500);
+                    echo "Error: El archivo asociado no existe.";
+                    return;
+                }
             }
         }
 

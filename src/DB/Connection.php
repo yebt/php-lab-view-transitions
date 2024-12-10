@@ -38,22 +38,28 @@ class Connection
      */
     private static function initialize(): void
     {
-        $config = require __DIR__ . '/../../config/db.php';
+        $config = require __DIR__ . "/../../config/db.php";
 
-        if (!isset($config['dsn'], $config['username'], $config['password'])) {
+        if (!isset($config["dsn"], $config["username"], $config["password"])) {
             throw new PDOException("Database configuration is incomplete.");
         }
 
         self::$instance = new PDO(
-            $config['dsn'],
-            $config['username'],
-            $config['password'],
-            $config['options'] ?? [],
+            $config["dsn"],
+            $config["username"],
+            $config["password"],
+            $config["options"] ?? []
         );
 
         // Configurar atributos adicionales, como errores y emulación de preparaciones
-        self::$instance->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        self::$instance->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+        self::$instance->setAttribute(
+            PDO::ATTR_ERRMODE,
+            PDO::ERRMODE_EXCEPTION
+        );
+        self::$instance->setAttribute(
+            PDO::ATTR_DEFAULT_FETCH_MODE,
+            PDO::FETCH_ASSOC
+        );
     }
 
     private function __clone()

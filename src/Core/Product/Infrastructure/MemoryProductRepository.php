@@ -13,42 +13,48 @@ class MemoryProductRepository implements ProductRepository
         [
             "id" => 1,
             "name" => "Dru Jacket in Wool and Silk",
-            "description" => "Single breasted tailored luxury jacket in structured wool and silk with peak lapels and jetted front pockets.",
+            "description" =>
+                "Single breasted tailored luxury jacket in structured wool and silk with peak lapels and jetted front pockets.",
             "price" => "1625",
             "images" => ["product1.jpeg"],
         ],
         [
             "id" => 2,
             "name" => "Pants in Wool and Silk",
-            "description" => "A pair of pants in structured wool and silk with peak lapels and jetted front pockets.",
+            "description" =>
+                "A pair of pants in structured wool and silk with peak lapels and jetted front pockets.",
             "price" => "1250",
             "images" => ["product2.jpeg"],
         ],
         [
             "id" => 3,
             "name" => "T-Shirt in Wool and Silk",
-            "description" => "A t-shirt in structured wool and silk with peak lapels and jetted front pockets.",
+            "description" =>
+                "A t-shirt in structured wool and silk with peak lapels and jetted front pockets.",
             "price" => "1250",
             "images" => ["product3.jpeg"],
         ],
         [
             "id" => 4,
             "name" => "Shorts in Wool and Silk",
-            "description" => "A pair of shorts in structured wool and silk with peak lapels and jetted front pockets.",
+            "description" =>
+                "A pair of shorts in structured wool and silk with peak lapels and jetted front pockets.",
             "price" => "1250",
             "images" => ["product4.jpeg"],
         ],
         [
             "id" => 5,
             "name" => "Sweater in Wool and Silk",
-            "description" => "A sweater in structured wool and silk with peak lapels and jetted front pockets.",
+            "description" =>
+                "A sweater in structured wool and silk with peak lapels and jetted front pockets.",
             "price" => "1250",
             "images" => ["product5.jpeg"],
         ],
         [
             "id" => 6,
             "name" => "Cashmere dress",
-            "description" => "A casual dress with a fitted bodice and a skirt in a neutral color.",
+            "description" =>
+                "A casual dress with a fitted bodice and a skirt in a neutral color.",
             "price" => "2344",
             "images" => ["product6.jpeg"],
         ],
@@ -75,7 +81,7 @@ class MemoryProductRepository implements ProductRepository
     {
         $filteredProduct = array_filter(
             $this->products,
-            fn($product) => $product['id'] . "" == $id,
+            fn($product) => $product["id"] . "" == $id
         );
         if (!$filteredProduct) {
             return null;
@@ -123,7 +129,11 @@ class MemoryProductRepository implements ProductRepository
 
     public function findByIndex(int $index): ?Product
     {
-        $productToReturn = array_filter($this->products, fn($product) => $product['id'] == $index)[0] ?? null;
+        $productToReturn =
+            array_filter(
+                $this->products,
+                fn($product) => $product["id"] == $index
+            )[0] ?? null;
         // $productToReturn = $this->products[$id] ?? null;
 
         if (!$productToReturn) {

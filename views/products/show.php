@@ -2,10 +2,9 @@
 
 use App\Core\Product\Infrastructure\MemoryProductRepository;
 
-$productId  = $id;
+$productId = $id;
 $repository = new MemoryProductRepository();
-$product    = $repository->findById($productId);
-
+$product = $repository->findById($productId);
 ?>
 
 <!DOCTYPE html>
@@ -13,7 +12,7 @@ $product    = $repository->findById($productId);
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>VT3 - Product - <?=$product->name?></title>
+        <title>VT3 - Product - <?= $product->name ?></title>
         <!-- favicon -->
         <link rel="icon" type="image/png" href="/favicon.png" />
         <!-- js -->
@@ -82,7 +81,7 @@ $product    = $repository->findById($productId);
         </div>
         <!---->
         <div
-            id="product-<?=$product->id?>"
+            id="product-<?= $product->id ?>"
             class="max-w-4xl mx-auto p-4 bg-white rounded-lg shadow-lg"
         >
             <div class="grid md:grid-cols-2 gap-8">
@@ -93,19 +92,19 @@ $product    = $repository->findById($productId);
                         decoding="async"
                         data-nimg="fill"
                         class="rounded-lg absolute inset-0 object-cover w-full h-full text-transparent"
-                        src="/assets/img/products/<?=$product->images[0]?>"
+                        src="/assets/img/products/<?= $product->images[0] ?>"
                     />
                 </div>
                 <div class="flex flex-col justify-between">
                     <div>
                         <h1 class="text-3xl font-bold mb-2">
-                            <?=$product->name?>
+                            <?= $product->name ?>
                         </h1>
                         <p class="text-2xl font-semibold mb-4">
-                            $ <?=number_format($product->price, 2)?>
+                            $ <?= number_format($product->price, 2) ?>
                         </p>
                         <p class="text-gray-600 mb-6">
-                            <?=$product->description?>
+                            <?= $product->description ?>
                         </p>
                     </div>
                     <button

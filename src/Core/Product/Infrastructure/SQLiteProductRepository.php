@@ -19,14 +19,15 @@ class SQLiteProductRepository implements ProductRepository
 
     public function save(Product $product): void
     {
-        $query = "INSERT INTO products (id, name, description, price, images) VALUES (:id, :name, :description, :price, :images)";
+        $query =
+            "INSERT INTO products (id, name, description, price, images) VALUES (:id, :name, :description, :price, :images)";
         $stmt = $this->connection->prepare($query);
         $stmt->execute([
-            ':id' => $product->id,
-            ':name' => $product->name,
-            ':description' => $product->description,
-            ':price' => $product->price,
-            ':images' => json_encode($product->images),
+            ":id" => $product->id,
+            ":name" => $product->name,
+            ":description" => $product->description,
+            ":price" => $product->price,
+            ":images" => json_encode($product->images),
         ]);
     }
 
@@ -34,7 +35,7 @@ class SQLiteProductRepository implements ProductRepository
     {
         $query = "SELECT * FROM products WHERE id = :id";
         $stmt = $this->connection->prepare($query);
-        $stmt->execute([':id' => $id]);
+        $stmt->execute([":id" => $id]);
 
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
         if (!$row) {
@@ -50,19 +51,20 @@ class SQLiteProductRepository implements ProductRepository
         $stmt = $this->connection->query($query);
         $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        return array_map([Product::class, 'factory'], $rows);
+        return array_map([Product::class, "factory"], $rows);
     }
 
     public function update(Product $product): void
     {
-        $query = "UPDATE products SET name = :name, description = :description, price = :price, images = :images WHERE id = :id";
+        $query =
+            "UPDATE products SET name = :name, description = :description, price = :price, images = :images WHERE id = :id";
         $stmt = $this->connection->prepare($query);
         $stmt->execute([
-            ':id' => $product->id,
-            ':name' => $product->name,
-            ':description' => $product->description,
-            ':price' => $product->price,
-            ':images' => json_encode($product->images),
+            ":id" => $product->id,
+            ":name" => $product->name,
+            ":description" => $product->description,
+            ":price" => $product->price,
+            ":images" => json_encode($product->images),
         ]);
     }
 
@@ -70,7 +72,6 @@ class SQLiteProductRepository implements ProductRepository
     {
         $query = "DELETE FROM products WHERE id = :id";
         $stmt = $this->connection->prepare($query);
-        $stmt->execute([':id' => $id]);
+        $stmt->execute([":id" => $id]);
     }
-
 }

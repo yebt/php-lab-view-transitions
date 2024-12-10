@@ -11,7 +11,12 @@
             "email": "yahir.eduardo.bravo@gmail.com"
         }
     ],
+    "scripts": {
+        "cs-check": "phpcs",
+        "cs-fix": "phpcbf"
+    },
     "require-dev": {
-        "symfony/var-dumper": "^7.2"
+        "symfony/var-dumper": "^7.2",
+        "squizlabs/php_codesniffer": "*"
     }
 }

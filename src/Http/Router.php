@@ -3,9 +3,9 @@ declare(strict_types=1);
 
 namespace App\Http;
 
-
-class Router {
-    private $routes = [];
+class Router
+{
+    private $routes     = [];
     private $errorFiles = [];
 
     /**
@@ -13,7 +13,8 @@ class Router {
     * @param string $path
     * @param string $file
     */
-    public function add($path, $file) {
+    public function add($path, $file)
+    {
         $this->routes[trim($path, '/')] = $file;
     }
 
@@ -22,7 +23,8 @@ class Router {
     * @param int $code
     * @param string $file
     */
-    public function addError($code, $file) {
+    public function addError($code, $file)
+    {
         $this->errorFiles[$code] = $file;
     }
 
@@ -30,7 +32,8 @@ class Router {
     * Dispatch the router
     * @return void
     */
-    public function dispatch() {
+    public function dispatch()
+    {
         $requestUri = trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
 
         if (array_key_exists($requestUri, $this->routes)) {

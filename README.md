@@ -9,7 +9,7 @@ Use Composer to install the dependencies and run the PHP built-in web server:
 
 ```bash
 composer install
-php -S localhost:8080
+php -S localhost:8080 -t public
 ```
 
 For changes in the CSS, you can use the `npm run dev` command to compile the
